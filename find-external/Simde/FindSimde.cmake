@@ -15,7 +15,12 @@ find_package_handle_standard_args(
   REQUIRED_VARS Simde_INCLUDE_DIR REASON_FAILURE_MESSAGE ${SIMDE_HINT_FAILURE})
 
 if(Simde_FOUND)
-  add_library(simde INTERFACE IMPORTED)
+  if (SIMDE_EXCLUDE_FROM_ALL)
+    add_library(simde INTERFACE EXCLUDE_FROM_ALL)
+  else()
+    add_library(simde INTERFACE IMPORTED)
+  endif()
+  # add_library(simde INTERFACE IMPORTED)
   set_target_properties(simde PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
                                          "${Simde_INCLUDE_DIR}")
 endif()
