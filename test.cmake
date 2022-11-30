@@ -141,6 +141,7 @@ macro(ADD_PYTHON_UNIT_TEST NAME SOURCE)
   endif()
 
   set(MODULES "${ARGN}") # ARGN is not a variable
+  
   foreach(MODULE_PATH IN LISTS MODULES)
     list(APPEND PYTHONPATH "${CMAKE_BINARY_DIR}/${MODULE_PATH}")
     message("foreach loop")
@@ -173,6 +174,7 @@ macro(ADD_PYTHON_UNIT_TEST NAME SOURCE)
     list(APPEND ENV_VARIABLES "DYLD_LIBRARY_PATH=$ENV{DYLD_LIBRARY_PATH}")
   endif(APPLE)
   set_tests_properties(${NAME} PROPERTIES ENVIRONMENT "${ENV_VARIABLES}")
+  message("PYTHONPATH=${PYTHONPATH_STR}")
 endmacro(
   ADD_PYTHON_UNIT_TEST
   NAME
