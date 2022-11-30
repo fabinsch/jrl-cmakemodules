@@ -143,8 +143,12 @@ macro(ADD_PYTHON_UNIT_TEST NAME SOURCE)
   set(MODULES "${ARGN}") # ARGN is not a variable
   foreach(MODULE_PATH IN LISTS MODULES)
     list(APPEND PYTHONPATH "${CMAKE_BINARY_DIR}/${MODULE_PATH}")
+    message("foreach loop")
+    message("${CMAKE_GENERATOR}")
+    
     if(CMAKE_GENERATOR MATCHES "Visual Studio")
       list(APPEND PYTHONPATH "${CMAKE_BINARY_DIR}/${MODULE_PATH}/$<CONFIG>")
+      message("CMAKE_GENERATOR")
     endif(CMAKE_GENERATOR MATCHES "Visual Studio")
   endforeach(MODULE_PATH IN LISTS MODULES)
 
